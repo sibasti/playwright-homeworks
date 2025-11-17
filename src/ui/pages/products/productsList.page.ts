@@ -1,4 +1,5 @@
 import { SalesPortalPage } from "../salesPortal.page";
+import { DeleteModal } from "./components/delete.modal";
 
 export class ProductsListPage extends SalesPortalPage {
   readonly productsPageTitle = this.page.locator("h2.fw-bold");
@@ -7,9 +8,20 @@ export class ProductsListPage extends SalesPortalPage {
 
   readonly uniqueElement = this.productsPageTitle;
 
+  readonly deleteModal = new DeleteModal(this.page);
+
   async clickAddNewProduct() {
     await this.addNewProductButton.click();
   }
+
+   tableRowByName(name: string) {
+    return this.page.locator("tbody tr", { hasText: name });
+  }
+
+   deleteButton(name: string) {
+    return this.tableRowByName(name)
+    .locator('button[title="Delete"]');
+}
 
   async getFirstRowProductData() {
     const row = this.firstRow;

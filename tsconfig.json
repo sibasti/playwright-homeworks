@@ -11,7 +11,9 @@
     "paths": {
       "config/*": ["config/*"],
       "data/*": ["data/*"],
-      "ui/*": ["ui/*"]
+      "ui/*": ["ui/*"],
+      "utils/*": ["utils/*"] 
+
     }
   },
 

@@ -1,25 +1,36 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "allowJs": true,
-
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "paths": {
+      "api/*": ["api/*"],
       "config/*": ["config/*"],
       "data/*": ["data/*"],
-      "ui/*": ["ui/*"],
-      "utils/*": ["utils/*"] 
+      "utils/*": ["utils/*"],
+      "ui/*": ["ui/*"]
+    },
 
-    }
+    "target": "ESNext",
+    "jsx": "react-jsx",
+    "moduleDetection": "force",
+
+    "module": "NodeNext",
+    "types": ["node"],
+
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+
+    "isolatedModules": true,
+    "verbatimModuleSyntax": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true
   },
 
-  "include": [
-    "src",
-    "tests",
-    "playwright.config.ts"
-  ]
+  "include": ["src", "playwright.config.ts"],
+  "exclude": ["node_modules"]
 }

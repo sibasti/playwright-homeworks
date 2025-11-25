@@ -1,12 +1,31 @@
-import { MANUFACTURERS } from "./manufacturers";
+import { IProduct, IProductFromResponse } from 'data/types/product.types';
+import { MANUFACTURERS } from './manufacturers';
+import { faker } from '@faker-js/faker';
+import { getRandomEnumValue } from 'utils/enum.utils';
 
-export function generateProductData() {
-  const productName = `Product ${Math.floor(Math.random() * 1000000)}`;
-  
+export function generateProductData(params?: Partial<IProduct>): IProduct {
   return {
-    name: productName.slice(0, 40), 
-    price: Math.floor(Math.random() * 900 + 100),
-    amount: Math.floor(Math.random() * 50 + 1),
-    manufacturer: MANUFACTURERS.APPLE,
+    name: faker.commerce.product() + ' ' + faker.number.int({ min: 1, max: 100000 }),
+    manufacturer: getRandomEnumValue(MANUFACTURERS),
+    price: faker.number.int({ min: 1, max: 99999 }),
+    amount: faker.number.int({ min: 0, max: 999 }),
+    notes: faker.string.alphanumeric({ length: 250 }),
+    ...params,
   };
-};
+}
+
+export function generateProductResponseData(
+  params?: Partial<IProduct>,
+): IProductFromResponse {
+  const initial = generateProductData(params);
+
+  return {
+    _id: faker.database.mongodbObjectId(),
+    name: initial.name,
+    amount: initial.amount,
+    price: initial.price,
+    manufacturer: initial.manufacturer,
+    createdOn: new Date().toISOString(),
+    notes: initial.notes ?? '',
+  };
+}
